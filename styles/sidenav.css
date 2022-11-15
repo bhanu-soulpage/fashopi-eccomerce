@@ -1,0 +1,57 @@
+.card-container {
+    min-width:244px;
+    background-color: #FFFFFF;
+box-shadow: 3.998px -0.14px 6px rgba(9, 8, 8, 0.09);
+
+}
+div {
+    font-family: "Roboto";
+}
+.navbar-bg {
+    background-color: #FFFFFF;
+    box-shadow: 3.998px -0.14px 6px rgba(9, 8, 8, 0.09);
+}
+.name {
+    margin-left: 5px;
+    margin-top: 2px;
+}
+.first-column-icons{
+    margin-right: 10px;
+    margin-top: 5px;
+}
+.category-side-nav :hover{
+    background-color: #F1F3F4;
+    border-radius: 0px;
+    font-weight: 700;
+    color: #DD0C55;
+   max-width:244px;
+
+}
+.category-links-side-nav{
+    display: block;
+    color: #35384D;
+    text-decoration: none;
+
+}
+.shop-name {
+    
+font-family: 'Roboto';
+font-style: normal;
+font-weight: 700;
+font-size: 18px;
+color: #DE0C55;
+}
+.store-address {
+    
+font-family: 'Roboto';
+font-style: normal;
+font-weight: 400;
+font-size: 14px;
+color: #35384D;
+opacity: 0.5;
+
+
+}
+.h-line {
+    border: 1.00412px solid #B5B5B8;
+}

@@ -1,0 +1,75 @@
+.bg-container {
+    background-color:#35384D;
+    height : 100vh;
+    
+}
+.card-content {
+    margin-top: 80px;
+}
+.input-fields{ 
+    width : 131px;
+}
+input { 
+    width:262px;
+}
+input[type=text],[type=password] { 
+    display: block;
+    color:#35384D;
+    border: none;
+    border-bottom: 2px solid #CCCCCC;
+    background-color: transparent
+}
+.signup-btn {
+    background-color:#DD0C55;
+    color : white;
+    height: 36px;
+    width: 280px;
+    border-radius: 0px;
+    margin-top: 20px;
+    border-width: 0px;
+    display: block;
+}
+.signup-form {
+    background-color: #ffffff;
+    height: auto;
+    min-height:430px;
+}
+.bottom-text { 
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 9px;
+    color: #35384D;
+    padding-top:10px;
+}
+.login-link,.signup-link{
+    
+font-family: 'Roboto';
+font-style: normal;
+font-weight: 600;
+font-size: 20px;
+text-decoration: none;
+color: #35384D;
+}
+.signup-link{
+    margin-left: 85px;
+}
+.required-msg  {
+    font-size: 12px;
+    color:red
+}
+.login-image {
+    max-width: 335px;
+    max-height: 430px;
+}
+.image-content {
+    text-align: center;
+    padding-top: 100px;
+    color: white;
+    overflow: hidden;
+    background: linear-gradient(rgb(72,0,72,0.8), rgb(192,72,72,0.8)), url("https://res.cloudinary.com/dhyjf9qjz/image/upload/v1668005032/Signup_tqv3se.png");  
+    background-size: cover;
+    background-repeat: no-repeat;
+    max-width: 335px;
+    min-height:430px;
+}

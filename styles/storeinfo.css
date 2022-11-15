@@ -1,0 +1,45 @@
+.category-bg-container {
+    background-color: #E5E5E5;
+    height:100vh;
+}
+.category-card-container {
+    background-color: #FBFBFC;
+    padding: 15px;
+    line-height: 2;
+
+}
+#input-format {
+    background-color: #FBFBFC;
+border: 1.4px solid #E1E1E1;
+border-radius :5px;
+}
+@media screen and (min-width : 480px) {
+    .tag{width: 540px;}
+    .popular{width: 540px;}
+    #textarea{width:360px;}
+}
+#input-format:hover {
+    border-color: #AF2988;
+}
+.label {
+font-family: 'Roboto';
+font-style: normal;
+font-weight: 400;
+font-size: 16px;
+color: #B5B5B8;
+}
+.about-head{
+    
+font-family: 'Roboto';
+font-weight: 700;
+font-size: 18px;
+line-height: 21px;
+color: #35384D;
+}
+.edit-icon {
+    width:23px;
+}
+.edit-btn {
+    border-width: 0px;
+    background-color: #FBFBFC;
+}

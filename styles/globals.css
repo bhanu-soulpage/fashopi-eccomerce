@@ -1,9 +1,17 @@
+@import "bootstrap/dist/css/bootstrap.css";
+@import 'react-toastify/dist/ReactToastify.css';
+
+@import './navbar.css';
+@import './signup.module.css';
+@import './dashboard.css';
+@import './sidenav.css';
+@import './storeinfo.css';
+
 html,
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: "Roboto";
 }
 
 a {

@@ -1,0 +1,71 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  previewFeatures = ["fullTextSearch", "fullTextIndex"]
+
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model TagsonStores {
+  store        Store     @relation(fields: [storeId], references: [id])
+  storeId      Int 
+  tag          Tag       @relation(fields: [tagId], references: [id])
+  tagId        Int 
+
+  @@map("store_tags")
+  @@id([storeId, tagId])
+}
+
+model Tag {
+ id            Int        @id @default(autoincrement())
+ name          String
+
+ stores        TagsonStores[] 
+
+ @@map("tags")
+}
+
+model Store {
+  id            Int       @id @default(autoincrement())
+  title         String
+  description   String? 
+  popularFor    String    @map("popular_for")
+  fullAddress   String    @map("address")
+  pincode       String? 
+  phone         String 
+  email         String 
+  website       String? 
+  active        Boolean   @default(true)
+  createdAt     DateTime  @default(now()) @map(name: "created_at")
+  updatedAt     DateTime  @updatedAt @map(name: "updated_at")
+
+  tags          TagsonStores[]
+
+  userId        Int?
+  user          User?     @relation(fields: [userId], references: [id])
+
+  @@map("stores")
+}
+
+model User {
+  id            Int       @id @default(autoincrement())
+  firstName     String    @map("first_name")
+  lastName      String    @map("last_name")
+  phoneNumber   String?   @map("phone_number")
+  email         String    @unique
+  password      String
+  reset         String?
+  createdAt     DateTime  @default(now()) @map(name: "created_at")
+  updatedAt     DateTime  @updatedAt @map(name: "updated_at")
+
+  stores Store[]
+
+  @@map("users")
+}
+

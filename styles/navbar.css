@@ -1,0 +1,23 @@
+.logo { 
+    width:115px;
+    height:46px;
+
+}
+
+.bell-icon-nav {
+    width:20px;
+    height:22px;
+}
+.drop-icon { 
+    width : 9px;
+    height:6px;
+}
+.user-image-upload {
+    margin-left: 10px;
+    margin-right:10px;
+    width:28px;
+    height:28px;
+}
+div {
+    font-family: "Roboto";
+}
