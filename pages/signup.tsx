@@ -44,7 +44,7 @@ export default function SignUp() {
       const userInfoData: any = {
         firstName: data.firstName,
         lastName: data.lastName,
-        phoneNumber: <data className="phoneNumber"></data>,
+        phoneNumber: data.phoneNumber,
         email: data.email,
         password: data.password,
       };

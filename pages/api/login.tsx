@@ -24,6 +24,7 @@ export default async function handler(req: ApiRequest, res: ApiResponse) {
       password: true,
     },
   });
+  console.log("User", user);
 
   if (user) {
     const authenticated = await bcrypt.compare(
