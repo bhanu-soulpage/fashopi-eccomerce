@@ -21,6 +21,7 @@ CREATE TABLE "stores" (
     "description" TEXT,
     "popular_for" TEXT NOT NULL,
     "address" TEXT NOT NULL,
+    "location" TEXT,
     "pincode" TEXT,
     "phone" TEXT NOT NULL,
     "email" TEXT NOT NULL,
@@ -28,7 +29,7 @@ CREATE TABLE "stores" (
     "active" BOOLEAN NOT NULL DEFAULT true,
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updated_at" TIMESTAMP(3) NOT NULL,
-    "userId" INTEGER,
+    "userId" INTEGER NOT NULL,
 
     CONSTRAINT "stores_pkey" PRIMARY KEY ("id")
 );
@@ -38,7 +39,7 @@ CREATE TABLE "users" (
     "id" SERIAL NOT NULL,
     "first_name" TEXT NOT NULL,
     "last_name" TEXT NOT NULL,
-    "phone_number" TEXT,
+    "phone_number" TEXT NOT NULL,
     "email" TEXT NOT NULL,
     "password" TEXT NOT NULL,
     "reset" TEXT,
@@ -52,10 +53,10 @@ CREATE TABLE "users" (
 CREATE UNIQUE INDEX "users_email_key" ON "users"("email");
 
 -- AddForeignKey
-ALTER TABLE "store_tags" ADD CONSTRAINT "store_tags_storeId_fkey" FOREIGN KEY ("storeId") REFERENCES "stores"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "store_tags" ADD CONSTRAINT "store_tags_storeId_fkey" FOREIGN KEY ("storeId") REFERENCES "stores"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "store_tags" ADD CONSTRAINT "store_tags_tagId_fkey" FOREIGN KEY ("tagId") REFERENCES "tags"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "store_tags" ADD CONSTRAINT "store_tags_tagId_fkey" FOREIGN KEY ("tagId") REFERENCES "tags"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "stores" ADD CONSTRAINT "stores_userId_fkey" FOREIGN KEY ("userId") REFERENCES "users"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "stores" ADD CONSTRAINT "stores_userId_fkey" FOREIGN KEY ("userId") REFERENCES "users"("id") ON DELETE CASCADE ON UPDATE CASCADE;

@@ -34,7 +34,7 @@ export default async function handler(req: ApiRequest, res: ApiResponse) {
     if (authenticated) {
       const token = jwt.sign(
         { id: user.id, role: user.firstName },
-        "fashopiy-user",
+        process.env.JWT_TOKEN_SECRET,
         { expiresIn: "3d" }
       );
       res

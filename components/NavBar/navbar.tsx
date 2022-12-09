@@ -1,50 +1,87 @@
-import Bell from 'public/bell 1.png';
-import Logo from 'public/Logo (2).svg';
-import Image from 'next/image';
-import dropIcon from 'public/drop-icon-nav.png';
-import userimage from 'public/nav-user-img.png';
-export default function NavBar () {
-    return (
-        <div>
-            <nav className="navbar navbar-expand-lg navbar-bg">
-            <div className="container-fluid">
-                <a className="navbar-brand" href="#">
-                    <Image src={Logo} alt="logo" className='logo' />
-                </a>
-                <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                <span className="navbar-toggler-icon"></span>
+import Container from "react-bootstrap/Container";
+import Nav from "react-bootstrap/Nav";
+import Navbar from "react-bootstrap/Navbar";
+import Bell from "public/bell 1.png";
+import Logo from "public/Logo (2).svg";
+import Image from "next/image";
+import dropIcon from "public/drop-icon-nav.png";
+import userimage from "public/nav-user-img.png";
+import router from "next/router";
+import AuthenticationService from "services/authentication.service";
+import cookie from "js-cookie";
+import ModalWindow from "components/Modal/modal";
+import { useUser } from "lib/hooks";
+import Link from "next/link";
+import { FaUserCircle } from "react-icons/fa";
+
+export const fetcher = (url: any) =>
+  fetch(url, {
+    headers: { Authorization: `Bearer ${cookie.get("accessToken")}` },
+  }).then((r) => r.json());
+
+function ReactNav() {
+  const [user] = useUser();
+  if (!user) return <div>Loading ...</div>;
+
+  const authService = new AuthenticationService();
+  const logoutHandler = async () => {
+    await authService.purgeAuth();
+    router.push("/signup");
+  };
+
+  return (
+    <Navbar bg="light" expand="lg">
+      <Container>
+        <Navbar.Brand href="#home">
+          <Image src={Logo} alt="logo" className="logo" />
+        </Navbar.Brand>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+       
+          <Nav className="ms-auto">
+            <Nav.Link href="#home">
+              <div className="d-flex btn-container-db">
+                <Link href="/dashboard" className="category-links-side-nav">
+                  <button className="dashboard-btn btn btn-primary">
+                    Dashboard
+                  </button>
+                </Link>
+
+                <Link
+                  href="/storeinfo"
+                  className="category-links-side-nav ms-2"
+                >
+                  <button className="create-btn btn btn-secondary">
+                    Create Store
+                  </button>
+                </Link>
+              </div>
+            </Nav.Link>
+              
+              <Nav.Link className="mt-md-3 ms-sm-1">
+                <div>
+                    <ModalWindow />
+                  </div>
+              </Nav.Link>
+              <Nav.Link className="mt-md-3 ms-sm-1">
+                <FaUserCircle className="user-profile-icon"/>
+              </Nav.Link>
+              <Nav.Link className="mt-md-3 ms-sm-1">
+                  {user.firstName + user.lastName}
+              </Nav.Link>
+              <Nav.Link className="mt-md-2 ms-sm-1">
+              <button onClick={logoutHandler} className="btn btn-danger">
+                  Logout
                 </button>
 
-
-                <div className="collapse navbar-collapse d-flex justify-content-between " id="navbarNavAltMarkup">
-                        <div className="navbar-nav">
-                            <div className="navbar  d-flex justify-content-between ">
-                            <div className="container-fluid">
-                                <div className='ms-5'>
-                                    <form className="d-flex" role="search">
-                                    <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-                                    <button className="btn btn-outline-success" type="submit">Search</button>
-                                    </form>
-                                </div>
-                            
-                             </div>
-
-                            </div>
-                        </div>
-                        
-                        <div className='d-flex flex-row justify-content-center align-items-center'>
-                            <Image src={Bell} alt="image" className='bell-icon-nav me-2' />
-                            <Image src={userimage} alt= "userImage" className='user-image-upload' />
-                            <p className='pt-3 ms-2 me-3'>Username</p>
-                            <a href="#">
-                            <Image src={dropIcon} alt="drop-icon" className='drop-icon ' /> 
-                            </a>
-                        </div>
-
-                </div>
-               
-            </div>
-            </nav>
-        </div>
-    )
+              </Nav.Link>
+            {/* <Nav.Link href="#link">Link</Nav.Link>
+            <Nav.Link href="#link">Link</Nav.Link> */}
+          </Nav>
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
+  );
 }
+
+export default ReactNav;

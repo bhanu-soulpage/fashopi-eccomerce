@@ -21,3 +21,20 @@
 div {
     font-family: "Roboto";
 }
+.dashboard-btn {
+    border-radius: 10px;
+    border-width: 0px;
+
+}
+.create-btn {
+    border-radius: 10px;
+    border-width: 0px;
+}
+.btn-container-db{
+    margin-top:12.2px;
+}
+.user-profile-icon{
+    width:24px;
+    height: 24px;
+
+}

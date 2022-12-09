@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600&display=swap');
+*{
+    font-family: "Rubik", sans-serif;
+
+}
+.all-card-container {
+   background-color: #ffffff;
+   border: 1px solid #DDDEE2;
+
+}
+.bg-all-stores {
+    background-color: #E5E5E5;
+    height : 100vh;
+}
+.title-all-stores {
+    color :  #35384D;
+    font-family : "Rubik", sans-serif;;
+    font-size: 36px;
+    text-align: center;
+}
+.all-stores-description{
+    font-family: "Rubik", sans-serif;
+    line-height: 1.4;
+    font-weight: 400;
+    color: #555;
+    word-spacing: 3;
+
+}
+.sub-titles {
+    font-family: "Rubik", sans-serif;
+    color : #35384D;
+    font-size: 18px;
+}
+.all-stores-sub{
+    margin-top: 0px;
+    padding-bottom: 10px;
+    margin-left: 30px;
+}
+.email-icon {
+    margin-top: 4px;
+}
+.all-stores-icons{
+    margin-top: 5px;
+    
+}
+.full-address-icon {
+    width:26px;
+    height:26px;
+}

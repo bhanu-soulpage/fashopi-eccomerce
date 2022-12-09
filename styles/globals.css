@@ -1,11 +1,15 @@
 @import "bootstrap/dist/css/bootstrap.css";
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600&display=swap');
 @import 'react-toastify/dist/ReactToastify.css';
-
+@import './card.css';
 @import './navbar.css';
 @import './signup.module.css';
 @import './dashboard.css';
 @import './sidenav.css';
 @import './storeinfo.css';
+@import './forgotpassword.css';
+@import './modal.css';
+@import './index.css';
 
 html,
 body {

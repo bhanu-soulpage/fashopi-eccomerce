@@ -13,9 +13,9 @@ datasource db {
 }
 
 model TagsonStores {
-  store        Store     @relation(fields: [storeId], references: [id])
+  store        Store     @relation(fields: [storeId], references: [id],onDelete:  Cascade)
   storeId      Int 
-  tag          Tag       @relation(fields: [tagId], references: [id])
+  tag          Tag       @relation(fields: [tagId], references: [id],onDelete:  Cascade)
   tagId        Int 
 
   @@map("store_tags")
@@ -25,7 +25,6 @@ model TagsonStores {
 model Tag {
  id            Int        @id @default(autoincrement())
  name          String
-
  stores        TagsonStores[] 
 
  @@map("tags")
@@ -37,6 +36,7 @@ model Store {
   description   String? 
   popularFor    String    @map("popular_for")
   fullAddress   String    @map("address")
+  location      String?    @map("location")
   pincode       String? 
   phone         String 
   email         String 
@@ -45,10 +45,10 @@ model Store {
   createdAt     DateTime  @default(now()) @map(name: "created_at")
   updatedAt     DateTime  @updatedAt @map(name: "updated_at")
 
-  tags          TagsonStores[]
+  tags          TagsonStores[] 
 
-  userId        Int?
-  user          User?     @relation(fields: [userId], references: [id])
+  userId        Int
+  user          User      @relation(fields: [userId], references: [id],onDelete:  Cascade)
 
   @@map("stores")
 }
@@ -57,7 +57,7 @@ model User {
   id            Int       @id @default(autoincrement())
   firstName     String    @map("first_name")
   lastName      String    @map("last_name")
-  phoneNumber   String?   @map("phone_number")
+  phoneNumber   String   @map("phone_number")
   email         String    @unique
   password      String
   reset         String?

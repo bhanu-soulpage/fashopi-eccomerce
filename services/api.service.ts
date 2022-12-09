@@ -34,6 +34,7 @@ abstract class APIService {
 
   purgeAuth(): void {
     cookie.remove("accessToken");
+    axios.defaults.headers.common.Authorization = `Bearer `;
   }
 
   // Axios get method

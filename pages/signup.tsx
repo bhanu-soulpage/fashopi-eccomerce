@@ -7,19 +7,11 @@ import { useState } from "react";
 import axios from "axios";
 import React, { FC } from "react";
 import { useRouter } from "next/router";
-import AuthenticationService from "services/authentication.service";
 import { toast } from "react-toastify";
+import AuthenticationService from "services/authentication.service";
 const authService = new AuthenticationService();
 
-export default function SignUp() {
-  type Profile = {
-    firstName: string;
-    lastName: string;
-    phoneNumber: string;
-    email: string;
-    password: string;
-  };
-
+export default function SignUp({ mutate }) {
   const { register, handleSubmit, formState, trigger } = useForm({
     defaultValues: {
       firstName: `${""}`,
@@ -29,8 +21,6 @@ export default function SignUp() {
       password: `${""}`,
     },
   });
-  const [userInfo, setUserInfo] = useState(`${""}`);
-
   const [login, setLogin] = useState(true);
 
   const regex: RegExp = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
@@ -40,7 +30,6 @@ export default function SignUp() {
 
   const submitHandler = async (data: any) => {
     try {
-      setUserInfo(data);
       const userInfoData: any = {
         firstName: data.firstName,
         lastName: data.lastName,
@@ -51,6 +40,7 @@ export default function SignUp() {
       const resp = await authService.createUser(userInfoData);
       await authService.authenticateUser(resp.token);
       console.log(resp.user);
+      router.push("/dashboard");
       toast.success(resp.message);
     } catch (e) {
       toast.error(e);
@@ -69,15 +59,14 @@ export default function SignUp() {
   // const [showPassword, setShowPassword] = React.useState(false);
 
   const { isSubmitting, errors } = formState;
+
   const loginSubmitHandler = (values: any) => {
     authService
       .userSignIN(values)
       .then((res: any) => {
         authService.authenticateUser(res?.token);
-        router.push({
-          pathname: "/dashboard",
-          query: res,
-        });
+        // router.push("/dashboard");
+        mutate();
         toast.success(res.message, { autoClose: 3000 });
       })
       .catch((err: any) => {
@@ -85,6 +74,7 @@ export default function SignUp() {
         toast.error(err.message, { autoClose: 3000 });
       });
   };
+
   return (
     <div className="container-fluid bg-container d-flex flex-column justify-content-center align-items-center">
       <div className="container ">
@@ -116,110 +106,94 @@ export default function SignUp() {
                 className="line-height p-5 pb-0 "
                 onSubmit={handleSubmit(submitHandler)}
               >
-                <div className="d-flex ">
-                  <div className="d-flex flex-column">
+                {/* <div className="d-flex g-1"> */}
+                {[
+                  {
+                    type: "text",
+                    placeholder: "FirstName",
+                    field: "firstName",
+                    validation: { required: true },
+                  },
+                  {
+                    type: "text",
+                    placeholder: "LastName",
+                    field: "lastName",
+                    validation: { required: true },
+                  },
+                  {
+                    type: "text",
+                    placeholder: "Phone Number",
+                    field: "phoneNumber",
+                    validation: {
+                      required: true,
+                      maxLength: {
+                        value: 10,
+                        message: "Mobile Number should be 10 digits only",
+                      },
+                    },
+                  },
+                  {
+                    type: "text",
+                    placeholder: "Email",
+                    field: "email",
+                    validation: {
+                      required: true,
+                      pattern: { value: regex, message: "Invalid Email" },
+                    },
+                  },
+                  {
+                    type: "password",
+                    placeholder: "Password",
+                    field: "password",
+                    validation: {
+                      required: true,
+                      minLength: {
+                        value: 8,
+                        message: "Password must be above 8 characters",
+                      },
+                    },
+                  },
+                ].map((e: any, id: any) => (
+                  <div
+                    className={
+                      "flex-column " +
+                      ([0, 1].includes(id)
+                        ? "d-inline-flex  w-50"
+                        : "d-flex w-100")
+                    }
+                  >
                     <input
-                      type="text"
-                      placeholder="FirstName"
-                      className="input-fields"
-                      {...register("firstName", { required: true })}
+                      type={e.type}
+                      placeholder={e.placeholder}
+                      className={
+                        "w-100 " +
+                        (id === 0 ? "me-2" : id === 1 ? "ms-2" : "mt-3")
+                      }
+                      {...register(e.field, { required: true })}
+                      onKeyUp={() => {
+                        trigger(e.field);
+                      }}
                     />
-                    {errors.firstName?.message}
-                    {errors.firstName?.type === "required" && (
+
+                    {errors[e.field]?.type === "maxLength" && (
+                      <span>Mobile Number should be 10 digits</span>
+                    )}
+                    {errors[e.field]?.type === "required" && (
                       <span className="text-danger required-msg ">
-                        Firstname is required
+                        {e.field} is required
+                      </span>
+                    )}
+                    {errors[e.field]?.message}
+                    {errors[e.field]?.type === "pattern" && (
+                      <span className="required-msg">
+                        Must Contain at least 8 Characters,One Uppercase,
+                        <br />
+                        One Lowercase One Number,One Special Character
                       </span>
                     )}
                   </div>
-
-                  <div className="d-flex flex-column">
-                    <input
-                      type="text"
-                      placeholder="Lastname"
-                      className="input-fields ms-1"
-                      {...register("lastName", { required: true })}
-                    />
-                    {errors.lastName?.type === "required" && (
-                      <span className=" required-msg">
-                        Lastname is required
-                      </span>
-                    )}
-                  </div>
-                </div>
-                {errors.lastName?.message}
-
-                <input
-                  type="text"
-                  placeholder="Mobile Number"
-                  className="mt-3"
-                  {...register("phoneNumber", {
-                    required: true,
-                    maxLength: {
-                      value: 10,
-                      message: "Mobile Number should be 10 digits only",
-                    },
-                  })}
-                  onKeyUp={() => {
-                    trigger("phoneNumber");
-                  }}
-                />
-
-                {errors.phoneNumber?.type === "maxLength" && (
-                  <span>Mobile Number should be 10 digits</span>
-                )}
-                {errors.phoneNumber?.type === "required" && (
-                  <span className=" required-msg">
-                    Mobile number is required
-                  </span>
-                )}
-
-                <input
-                  type="text"
-                  placeholder="Email"
-                  className="mt-3"
-                  {...register("email", {
-                    required: true,
-                    pattern: { value: regex, message: "Invalid Email" },
-                  })}
-                  onKeyUp={() => {
-                    trigger("email");
-                  }}
-                />
-                {errors.email?.message}
-                {errors.email?.type === "required" && (
-                  <span className=" required-msg">Email is required</span>
-                )}
-
-                <input
-                  type="password"
-                  placeholder="Password"
-                  className="mt-3"
-                  {...register("password", {
-                    required: true,
-                    minLength: {
-                      value: 8,
-                      message: "Password must be above 8 characters",
-                    },
-                    pattern: {
-                      value:
-                        /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}$/,
-                      message: `""`,
-                    },
-                  })}
-                  onKeyUp={() => {
-                    trigger("password");
-                  }}
-                />
-                {errors.password?.type === "pattern" && (
-                  <span className="required-msg">
-                    Must Contain at least 8 Characters,One Uppercase,
-                    <br />
-                    One Lowercase One Number,One Special Character
-                  </span>
-                )}
-                {errors.password?.type === "required" && (
-                  <span className="required-msg">Password is required</span>
-                )}
+                ))}
+                {/* </div> */}
 
                 <button className="signup-btn">SignUp</button>
                 <p className="text-center bottom-text">
@@ -281,6 +255,14 @@ export default function SignUp() {
                 {errors.password?.type === "required" && (
                   <span className="required-msg">Password is required</span>
                 )}
+                <div className="d-flex justify-content-between mt-2">
+                  <a href="#" className="links">
+                    OTP login
+                  </a>
+                  <a href="/forgotpassword" className="links">
+                    Forgot Password
+                  </a>
+                </div>
 
                 <button className="signup-btn">Login</button>
               </form>

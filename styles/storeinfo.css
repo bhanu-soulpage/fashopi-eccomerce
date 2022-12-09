@@ -1,45 +1,74 @@
 .category-bg-container {
-    background-color: #E5E5E5;
-    height:100vh;
+  background-color: #e5e5e5;
+  height: 100vh;
+}
+.title {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+
+  color: #35384d;
 }
 .category-card-container {
-    background-color: #FBFBFC;
-    padding: 15px;
-    line-height: 2;
-
+  background-color: #fbfbfc;
+  padding: 15px;
+  line-height: 2;
 }
 #input-format {
-    background-color: #FBFBFC;
-border: 1.4px solid #E1E1E1;
-border-radius :5px;
+  background-color: #fbfbfc;
+  border: 1.4px solid #e1e1e1;
+  border-radius: 5px;
 }
-@media screen and (min-width : 480px) {
-    .tag{width: 540px;}
-    .popular{width: 540px;}
-    #textarea{width:360px;}
+@media screen and (min-width: 480px) {
+  .tag {
+    width: 540px;
+  }
+  .popular {
+    width: 540px;
+  }
+  #textarea {
+    width: 360px;
+  }
 }
 #input-format:hover {
-    border-color: #AF2988;
+  border-color: #af2988;
 }
 .label {
-font-family: 'Roboto';
-font-style: normal;
-font-weight: 400;
-font-size: 16px;
-color: #B5B5B8;
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  color: #b5b5b8;
 }
-.about-head{
-    
-font-family: 'Roboto';
-font-weight: 700;
-font-size: 18px;
-line-height: 21px;
-color: #35384D;
+.about-head {
+  font-family: "Roboto";
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 21px;
+  color: #35384d;
 }
 .edit-icon {
-    width:23px;
+  width: 23px;
 }
 .edit-btn {
-    border-width: 0px;
-    background-color: #FBFBFC;
+  border-width: 0px;
+  background-color: #fbfbfc;
+}
+.contact {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+
+  color: #35384d;
+}
+.publish-btn {
+    height: 48px;
+width: 103px;
+background-color: #DD0C55;
+color:#ffffff;
+border-width: 0px;
+border-radius: 0px;
+
 }
