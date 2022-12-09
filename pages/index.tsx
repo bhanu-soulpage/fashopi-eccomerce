@@ -27,7 +27,7 @@ export default function Home() {
             <h1 className="text-center mt-3">All Stores</h1>
             {allStores.map((ele)=>{
               return(
-              <div className="col-12 col-md-6">
+              <div className="col-12 col-md-6" key={"1"}>
                 <div className="all-card-container p-4">
                     <h1 className="title-all-stores mb-3">{ele.title}</h1>
                     <p className="sub-titles mb-1">Description : -</p>

@@ -155,6 +155,7 @@ export default function SignUp({ mutate }) {
                   },
                 ].map((e: any, id: any) => (
                   <div
+                  key={2}
                     className={
                       "flex-column " +
                       ([0, 1].includes(id)
@@ -256,12 +257,12 @@ export default function SignUp({ mutate }) {
                   <span className="required-msg">Password is required</span>
                 )}
                 <div className="d-flex justify-content-between mt-2">
-                  <a href="#" className="links">
+                  <Link href="#" className="links">
                     OTP login
-                  </a>
-                  <a href="/forgotpassword" className="links">
+                  </Link>
+                  <Link href="/forgotpassword" className="links">
                     Forgot Password
-                  </a>
+                  </Link>
                 </div>
 
                 <button className="signup-btn">Login</button>
